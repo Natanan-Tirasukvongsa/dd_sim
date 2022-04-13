@@ -6,9 +6,7 @@ Panels:
       Expanded:
         - /RobotModel1/Links1
         - /TF1/Frames1
-        - /DepthCloud1
         - /DepthCloud1/Auto Size1
-        - /PointCloud21
       Splitter Ratio: 0.5
     Tree Height: 412
   - Class: rviz/Selection
@@ -29,7 +27,7 @@ Panels:
     Experimental: false
     Name: Time
     SyncMode: 0
-    SyncSource: LaserScan
+    SyncSource: ""
 Preferences:
   PromptSaveOnExit: true
 Toolbars:
@@ -212,8 +210,6 @@ Visualization Manager:
           Value: false
         left_wheel:
           Value: false
-        odom:
-          Value: true
         right_wheel:
           Value: false
       Marker Scale: 1
@@ -222,31 +218,30 @@ Visualization Manager:
       Show Axes: true
       Show Names: true
       Tree:
-        odom:
-          footprint:
-            base_link:
-              ball_wheel:
-                {}
-              camera_bottom_screw_frame:
-                camera_link:
-                  camera_depth_frame:
-                    camera_color_frame:
-                      camera_color_optical_frame:
-                        {}
-                    camera_depth_optical_frame:
+        footprint:
+          base_link:
+            ball_wheel:
+              {}
+            camera_bottom_screw_frame:
+              camera_link:
+                camera_depth_frame:
+                  camera_color_frame:
+                    camera_color_optical_frame:
                       {}
-                    camera_left_ir_frame:
-                      camera_left_ir_optical_frame:
-                        {}
-                    camera_right_ir_frame:
-                      camera_right_ir_optical_frame:
-                        {}
-              hokuyo_link:
-                {}
-              left_wheel:
-                {}
-              right_wheel:
-                {}
+                  camera_depth_optical_frame:
+                    {}
+                  camera_left_ir_frame:
+                    camera_left_ir_optical_frame:
+                      {}
+                  camera_right_ir_frame:
+                    camera_right_ir_optical_frame:
+                      {}
+            hokuyo_link:
+              {}
+            left_wheel:
+              {}
+            right_wheel:
+              {}
       Update Interval: 0
       Value: true
     - Alpha: 1
@@ -365,7 +360,7 @@ Visualization Manager:
   Global Options:
     Background Color: 48; 48; 48
     Default Light: true
-    Fixed Frame: base_link
+    Fixed Frame: footprint
     Frame Rate: 30
   Name: root
   Tools:
@@ -404,10 +399,10 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.3647964596748352
+      Pitch: 0.15979662537574768
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 6.202908992767334
+      Yaw: 4.382911205291748
     Saved: ~
 Window Geometry:
   Camera:
