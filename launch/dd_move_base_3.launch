@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<launch>
+  <master auto="start"/>
+
+  <param name="robot_description" command="$(find xacro)/xacro --inorder $(find dd_sim)/model/dd_sim.xacro"/>
+
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
+    <param name="use_gui" value="False"/>
+  </node>  
+
+  <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher"></node>
+
+  <!-- Map server -->
+  <arg name="map_file" default="$(find dd_sim)/map/dd_map_1.yaml"/>
+  <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)" />
+
+  <!-- Place map frame at odometry frame -->
+  <node pkg="tf" type="static_transform_publisher" name="map_odom_boardcaster"
+      args="0 0 0 0 0 0 map odom 100"/>
+  
+  <!--edit-->
+  <node pkg="tf" type="static_transform_publisher" name="world_to_map" args="0 0 0 0 0 0 world map 100"/>
+  <node pkg="tf" type="static_transform_publisher" name="base_link_broadcaster" args="0 0 0.055 0 0 0 footprint base_link 100" />
+
+  <!-- AMCL -->
+  <include file="$(find dd_sim)/launch/dd_amcl.launch"/>  
+  
+  <!-- Arguments -->
+  <arg name="cmd_vel_topic" default="/dd/base_controller/cmd_vel" />
+  <arg name="odom_topic" default="/dd/base_controller/odom" />
+  <arg name="move_forward_only" default="false"/>
+
+  <!-- move_base -->
+  <remap from="cmd_vel" to="$(arg cmd_vel_topic)"/>
+  <remap from="odom" to="$(arg odom_topic)"/>
+  <param name="DWAPlannerROS/min_vel_x" value="0.0" if="$(arg move_forward_only)" />
+  <!-- </node> -->
+
+  <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
+    <rosparam file="$(find dd_sim)/param/dd_costmap_common_params_2.yaml" command="load" ns="global_costmap" />
+    <rosparam file="$(find dd_sim)/param/dd_costmap_common_params_2.yaml" command="load" ns="local_costmap" />
+    <rosparam file="$(find dd_sim)/param/dd_local_costmap_params_2.yaml" command="load" ns="local_costmap" />
+    <rosparam file="$(find dd_sim)/param/dd_global_costmap_params_2.yaml" command="load" ns="global_costmap" />
+    <rosparam file="$(find dd_sim)/param/dd_base_local_planner_params_2.yaml" command="load" />
+  </node>
+
+  <!-- rviz -->
+  <node pkg="rviz" type="rviz" name="rviz" required="true"
+    args="-d $(find dd_sim)/rviz/dd_move_base.rviz"/>
+
+  <!-- <node name="static_tf0" pkg="tf" type="static_transform_publisher" args="0 0 0 0 0 0 map footprint 100"/> -->
+
+</launch>

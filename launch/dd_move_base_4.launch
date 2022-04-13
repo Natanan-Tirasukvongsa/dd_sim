@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<launch>
+  
+  <!-- Arguments -->
+  <arg name="cmd_vel_topic" default="/dd/base_controller/cmd_vel" />
+  <arg name="odom_topic" default="/dd/base_controller/odom" />
+  <arg name="move_forward_only" default="false"/>
+
+  <!-- move_base -->
+  <remap from="cmd_vel" to="$(arg cmd_vel_topic)"/>
+  <remap from="odom" to="$(arg odom_topic)"/>
+  <param name="DWAPlannerROS/min_vel_x" value="0.0" if="$(arg move_forward_only)" />
+
+  <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
+    <rosparam file="$(find dd_sim)/param/dd_costmap_common_params_2.yaml" command="load" ns="global_costmap" />
+    <rosparam file="$(find dd_sim)/param/dd_costmap_common_params_2.yaml" command="load" ns="local_costmap" />
+    <rosparam file="$(find dd_sim)/param/dd_local_costmap_params_2.yaml" command="load" ns="local_costmap" />
+    <rosparam file="$(find dd_sim)/param/dd_global_costmap_params_2.yaml" command="load" ns="global_costmap" />
+    <rosparam file="$(find dd_sim)/param/dd_base_local_planner_params_2.yaml" command="load" />
+  </node>
+
+</launch>
