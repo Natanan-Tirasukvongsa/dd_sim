@@ -26,10 +26,10 @@ publish_frequency: 5.0
 transform_tolerance: 0.2
 
 # Width of the map in meters
-width: 75
+width: 10 #75
 
 # Height of the map in meters
-height: 75
+height: 10 #75
 
 rolling_window: true
 
@@ -49,7 +49,7 @@ static_layer:
 # Map layer that contains information about the obstacles in the environment as detected by LIDAR
 obstacle_layer:
   observation_sources: laser_scan_sensor
-  laser_scan_sensor: {sensor_frame: laser_link, data_type: LaserScan, topic: scan, marking: true, clearing: true}
+  laser_scan_sensor: {sensor_frame: hokuyo_link, data_type: LaserScan, topic: /dd/laser/scan, marking: true, clearing: true}
 
 # Map layer that adds a cushion in meters around obstacles
 inflation_layer:
