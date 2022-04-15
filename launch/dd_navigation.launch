@@ -12,7 +12,11 @@
 
   <!-- Map server -->
   <arg name="map_file" default="$(find dd_sim)/map/dd_map_1.yaml"/>
-  <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)" />
+  <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)" >
+    <!--edit-->
+    <param name="frame_id" value="map"/>
+    <param name="odom_id" value="odom"/>
+  </node>
 
   <!-- Place map frame at odometry frame -->
   <node pkg="tf" type="static_transform_publisher" name="map_odom_boardcaster" args="0 0 0 0 0 0 map odom 100"/>
