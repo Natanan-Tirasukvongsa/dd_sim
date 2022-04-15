@@ -14,8 +14,8 @@
   <arg name="map_file" default="$(find dd_sim)/map/dd_map_1.yaml"/>
   <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)" >
     <!--edit-->
-    <param name="frame_id" value="map"/>
-    <param name="odom_id" value="odom"/>
+    <param name="map_frame_id" value="map"/>
+    <param name="odom_frame_id" value="odom"/>
   </node>
 
   <!-- Place map frame at odometry frame -->
