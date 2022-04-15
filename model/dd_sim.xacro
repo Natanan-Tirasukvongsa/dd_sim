@@ -264,7 +264,7 @@
 
     
     <xacro:include filename="$(find dd_sim)/model/dd_gazebo_plugins.xacro"/>
-    <!-- <xacro:include filename="$(find dd_sim)/urdf/camera.gazebo"/> -->
+    <!-- <xacro:include filename="$(find dd_sim)/gazebo/camera.gazebo"/> -->
     <xacro:include filename="$(find dd_sim)/gazebo/hokuyo.gazebo"/>
     <xacro:include filename="$(find dd_sim)/model/color.xacro"/>
     <xacro:include filename="$(find dd_sim)/model/d435.xacro" />
