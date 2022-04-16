@@ -91,7 +91,7 @@
            (e.g., false for kinectv2, zed, realsense, true for xtion, kinect360)-->
       <!--approx_sync should be true when camera topics are not already synchronized by the camera node like here for freenect or openni2 drivers for Kinect For Xbox 360-->
       <!--approx_sync should be false with camera drivers for Kinect v2, ZED or realsense as they publish rgb and depth topics already synchronized (same stamp)-->
-      <param name="approx_sync"    type="bool"   value="false"/> 
+      <param name="approx_sync"    type="bool"   value="true"/> 
     </node>
 
     <!--delete_db_on_start argument will make rtabmap to delete the database (default located in ~/.ros/rtabmap.db) when starting. 
@@ -110,7 +110,7 @@
           <!--However, in this setup, we will use RGB-D image input instead, so subscribe_depth is set to false and subscribe_rgbd is set to true.-->
           <!--Since we have a 2D lidar, set subscribe_scan to true-->
           <!--If we have a 3D lidar publishing sensor_msgs/PointCloud2 messages, set subscribe_scan_cloud to true instead and remap corresponding scan_cloud topic instead of scan-->
-          <param name="subscribe_depth" type="bool" value="true"/>
+          <param name="subscribe_depth" type="bool" value="false"/>
 
           <!--rtabmap: Parameters subscribe_rgb and subscribe_rgbd cannot be true at the same time
           Parameter subscribe_rgb is set to false-->
@@ -128,7 +128,7 @@
           <remap from="rgbd_image" to="rgbd_image"/>
 
           <!--Higher the value (Hz), more flexible can be the rate used for each topic-->
-          <param name="queue_size" type="int" value="10"/>
+          <param name="queue_size" type="int" value="1000"/>
 
           <!--This section sets the RTAB-Map's parameters (the same as in Preferences dialog in the standalone version)-->
           <!-- RTAB-Map's parameters -->
@@ -169,7 +169,7 @@
           <param name="Vis/InlierDistance"            type="string"    value="0.1"/>
           <param name="Rtabmap/TimeThr"               type="string"    value="700"/>
           <param name="Mem/RehearsalSimilarity"       type="string"    value="0.30"/>
-          <param name="Optimizer/Slam2D"              type="string"    value="true"/>
+          <!-- <param name="Optimizer/Slam2D"              type="string"    value="true"/> -->
           <param if="$(arg localization)" name="Mem/IncrementalMemory" type="string" value="false"/>
           <param if="$(arg localization)" name="Mem/InitWMWithAllNodes" type="string" value="true"/>
 
